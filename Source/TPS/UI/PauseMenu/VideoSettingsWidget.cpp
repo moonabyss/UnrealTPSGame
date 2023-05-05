@@ -1,0 +1,35 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#include "UI/PauseMenu/VideoSettingsWidget.h"
+#include "Components/VerticalBox.h"
+#include "Settings/TPSGameUserSettings.h"
+#include "UI/PauseMenu/SettingOptionWidget.h"
+
+DEFINE_LOG_CATEGORY_STATIC(LogVideoSettingsWidget, All, All);
+
+void UVideoSettingsWidget::NativeOnInitialized()
+{
+    Super::NativeOnInitialized();
+
+    auto* UserSettings = UTPSGameUserSettings::Get();
+    if (!UserSettings)
+    {
+        UE_LOG(LogVideoSettingsWidget, Error, TEXT("TPSGameUserSettings is nullptr"));
+        return;
+    }
+
+    UserSettings->LoadSettings();
+
+    const auto VideoSettings = UserSettings->GetVideoSettings();
+
+    check(VideoSettingsContainer);
+    VideoSettingsContainer->ClearChildren();
+
+    for (auto* Setting : VideoSettings)
+    {
+        const auto SettingWidget = CreateWidget<USettingOptionWidget>(this, SettingOptionWidgetClass);
+        check(SettingWidget);
+        SettingWidget->Init(Setting);
+        VideoSettingsContainer->AddChild(SettingWidget);
+    }
+}
