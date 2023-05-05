@@ -12,9 +12,12 @@ void ATPSPlayerController::SetupInputComponent()
 
 void ATPSPlayerController::ToggleGamePause()
 {
-    SetPause(!IsPaused());
-    bShowMouseCursor = IsPaused();
-    IsPaused()                                                                   //
+    bInPause = !bInPause;
+    SetPause(bInPause);
+    bShowMouseCursor = bInPause;
+    bInPause                                                                     //
         ? SetInputMode(FInputModeGameAndUI().SetHideCursorDuringCapture(false))  //
         : SetInputMode(FInputModeGameOnly());
+
+    OnGamePause.Broadcast(bInPause);
 }

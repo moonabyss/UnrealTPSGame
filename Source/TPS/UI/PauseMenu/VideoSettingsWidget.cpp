@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UI/PauseMenu/VideoSettingsWidget.h"
+#include "Components/Button.h"
 #include "Components/VerticalBox.h"
 #include "Settings/TPSGameUserSettings.h"
 #include "UI/PauseMenu/SettingOptionWidget.h"
@@ -31,5 +32,31 @@ void UVideoSettingsWidget::NativeOnInitialized()
         check(SettingWidget);
         SettingWidget->Init(Setting);
         VideoSettingsContainer->AddChild(SettingWidget);
+    }
+
+    check(RunBenchmarkButton);
+    RunBenchmarkButton->OnClicked.AddDynamic(this, &ThisClass::OnBenchmark);
+
+    UserSettings->OnVideoSettingsUpdated.AddUObject(this, &ThisClass::OnVideoSettingsUpdated);
+}
+
+void UVideoSettingsWidget::OnBenchmark()
+{
+    if (auto* UserSettings = UTPSGameUserSettings::Get())
+    {
+        UserSettings->RunBenchmark();
+    }
+}
+
+void UVideoSettingsWidget::OnVideoSettingsUpdated()
+{
+    if (!VideoSettingsContainer) return;
+
+    for (auto* Widget : VideoSettingsContainer->GetAllChildren())
+    {
+        if (auto* SettingOptionWidget = Cast<USettingOptionWidget>(Widget))
+        {
+            SettingOptionWidget->UpdateTexts();
+        }
     }
 }

@@ -7,8 +7,6 @@
 
 #include "TPSGameMode.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnGamePauseDelegate, bool, IsPaused);
-
 UCLASS(minimalapi)
 class ATPSGameMode : public AGameModeBase
 {
@@ -16,10 +14,4 @@ class ATPSGameMode : public AGameModeBase
 
 public:
     ATPSGameMode();
-
-    virtual bool SetPause(APlayerController* PC, FCanUnpause CanUnpauseDelegate = FCanUnpause()) override;
-    virtual bool ClearPause() override;
-
-    UPROPERTY(BlueprintAssignable)
-    FOnGamePauseDelegate OnGamePause;
 };

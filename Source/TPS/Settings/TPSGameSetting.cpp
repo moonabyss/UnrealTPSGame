@@ -4,7 +4,7 @@
 
 DEFINE_LOG_CATEGORY_STATIC(LogTPSGameSetting, All, All);
 
-void UTPSGameSetting::SetName(const FString& InName)
+void UTPSGameSetting::SetName(const FText& InName)
 {
     Name = InName;
 }
@@ -14,7 +14,7 @@ void UTPSGameSetting::SetOptions(const TArray<FSettingOption>& InOptions)
     Options = InOptions;
 }
 
-FString UTPSGameSetting::GetName() const
+FText UTPSGameSetting::GetName() const
 {
     return Name;
 }
@@ -64,7 +64,7 @@ int32 UTPSGameSetting::GetCurrentValue() const
 {
     if (!Getter)
     {
-        UE_LOG(LogTPSGameSetting, Error, TEXT("Getter func is not set for %s"), *Name);
+        UE_LOG(LogTPSGameSetting, Error, TEXT("Getter func is not set for %s"), *Name.ToString());
         return INDEX_NONE;
     }
     return Getter();
@@ -74,7 +74,7 @@ void UTPSGameSetting::SetCurrentValue(int32 Value)
 {
     if (!Setter)
     {
-        UE_LOG(LogTPSGameSetting, Error, TEXT("Setter func is not set for %s"), *Name);
+        UE_LOG(LogTPSGameSetting, Error, TEXT("Setter func is not set for %s"), *Name.ToString());
         return;
     }
     Setter(Value);

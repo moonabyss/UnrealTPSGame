@@ -15,27 +15,3 @@ ATPSGameMode::ATPSGameMode()
         DefaultPawnClass = PlayerPawnBPClass.Class;
     }
 }
-
-bool ATPSGameMode::SetPause(APlayerController* PC, FCanUnpause CanUnpauseDelegate /*= FCanUnpause()*/)
-{
-    const bool Succeed = Super::SetPause(PC, CanUnpauseDelegate);
-
-    if (Succeed)
-    {
-        OnGamePause.Broadcast(true);
-    }
-
-    return Succeed;
-}
-
-bool ATPSGameMode::ClearPause()
-{
-    const bool Succeed = Super::ClearPause();
-
-    if (Succeed)
-    {
-        OnGamePause.Broadcast(false);
-    }
-
-    return Succeed;
-}

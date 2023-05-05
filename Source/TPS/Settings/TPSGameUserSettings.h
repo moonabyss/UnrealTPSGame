@@ -7,6 +7,8 @@
 
 #include "TPSGameUserSettings.generated.h"
 
+DECLARE_MULTICAST_DELEGATE(FOnSettingsUpdatedDelegate);
+
 class UTPSGameSetting;
 
 UCLASS()
@@ -19,6 +21,9 @@ public:
     static UTPSGameUserSettings* Get();
 
     const TArray<UTPSGameSetting*>& GetVideoSettings() const;
+
+    void RunBenchmark();
+    FOnSettingsUpdatedDelegate OnVideoSettingsUpdated;
 
 private:
     UPROPERTY()

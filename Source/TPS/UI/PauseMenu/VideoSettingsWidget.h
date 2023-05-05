@@ -7,6 +7,7 @@
 
 #include "VideoSettingsWidget.generated.h"
 
+class UButton;
 class USettingOptionWidget;
 class UVerticalBox;
 
@@ -21,6 +22,15 @@ protected:
     UPROPERTY(meta = (BindWidget))
     UVerticalBox* VideoSettingsContainer;
 
+    UPROPERTY(meta = (BindWidget))
+    UButton* RunBenchmarkButton;
+
     UPROPERTY(Category = "UI", EditDefaultsOnly, BlueprintReadOnly)
     TSubclassOf<USettingOptionWidget> SettingOptionWidgetClass;
+
+private:
+    UFUNCTION()
+    void OnBenchmark();
+
+    void OnVideoSettingsUpdated();
 };

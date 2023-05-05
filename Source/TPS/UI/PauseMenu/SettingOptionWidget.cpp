@@ -30,8 +30,8 @@ void USettingOptionWidget::UpdateTexts()
 {
     if (Setting.IsValid())
     {
-        SettingDisplayName->SetText(FText::FromString(Setting->GetName()));
-        SettingCurrentValue->SetText(FText::FromString(Setting->GetCurrentOption().Name));
+        SettingDisplayName->SetText(Setting->GetName());
+        SettingCurrentValue->SetText(Setting->GetCurrentOption().Name);
     }
 }
 
@@ -40,7 +40,7 @@ void USettingOptionWidget::OnNextSetting()
     if (Setting.IsValid())
     {
         Setting->ApplyNextOption();
-        SettingCurrentValue->SetText(FText::FromString(Setting->GetCurrentOption().Name));
+        SettingCurrentValue->SetText(Setting->GetCurrentOption().Name);
     }
 }
 
@@ -49,6 +49,6 @@ void USettingOptionWidget::OnPrevSetting()
     if (Setting.IsValid())
     {
         Setting->ApplyPrevOption();
-        SettingCurrentValue->SetText(FText::FromString(Setting->GetCurrentOption().Name));
+        SettingCurrentValue->SetText(Setting->GetCurrentOption().Name);
     }
 }

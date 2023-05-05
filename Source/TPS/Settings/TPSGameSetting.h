@@ -10,7 +10,7 @@ struct FSettingOption
 {
     GENERATED_BODY()
 
-    FString Name;
+    FText Name;
     int32 Value;
 };
 
@@ -20,10 +20,10 @@ class UTPSGameSetting : public UObject
     GENERATED_BODY()
 
 public:
-    void SetName(const FString& InName);
+    void SetName(const FText& InName);
     void SetOptions(const TArray<FSettingOption>& InOptions);
 
-    FString GetName() const;
+    FText GetName() const;
     FSettingOption GetCurrentOption() const;
     void AddGetter(TFunction<int32()> Func);
     void AddSetter(TFunction<void(int32)> Func);
@@ -32,7 +32,7 @@ public:
     void ApplyPrevOption();
 
 private:
-    FString Name;
+    FText Name;
     TArray<FSettingOption> Options;
     TFunction<int32()> Getter;
     TFunction<void(int32)> Setter;
