@@ -3,17 +3,17 @@
 #if WITH_AUTOMATION_TESTS
 
 #include "TPS/Tests/TPSInventoryItemTests.h"
-#include "CoreMinimal.h"
-#include "Misc/AutomationTest.h"
-#include "TPS/Items/TPSInventoryItem.h"
-#include "Engine/World.h"
 #include "Components/SphereComponent.h"
-#include "Components/TextRenderComponent.h"
 #include "Components/StaticMeshComponent.h"
-#include "TPS/Tests/TestUtils.h"
+#include "Components/TextRenderComponent.h"
+#include "CoreMinimal.h"
+#include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
-#include "TPS/TPSCharacter.h"
+#include "Misc/AutomationTest.h"
 #include "TPS/Components/TPSInventoryComponent.h"
+#include "TPS/Items/TPSInventoryItem.h"
+#include "TPS/TPSCharacter.h"
+#include "TPS/Tests/TestUtils.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FCppActorCantBeCreated, "TPSGame.Items.Inventory.CppActorCantBeCreated",
     EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
@@ -32,8 +32,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FEveryInventoryItemMeshExists, "TPSGame.Items.I
 
 namespace
 {
-constexpr char* InventoryItemBPName = "/Script/Engine.Blueprint'/Game/Inventory/BP_TPSInventoryItem.BP_TPSInventoryItem'";
-constexpr char* InventoryItemBPTestName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_TPSInventoryItem.BP_Test_TPSInventoryItem'";
+    constexpr char* InventoryItemBPName = "/Script/Engine.Blueprint'/Game/Inventory/BP_TPSInventoryItem.BP_TPSInventoryItem'";
+    constexpr char* InventoryItemBPTestName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_TPSInventoryItem.BP_Test_TPSInventoryItem'";
 }  // namespace
 
 using namespace TPS::Test;

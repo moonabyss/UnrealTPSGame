@@ -69,11 +69,7 @@ bool FItemScoresShouldBeZerosByDefault::RunTest(const FString& Parameters)
     TestTrueExpr(InvComp->GetInventoryAmountByType(EnumElem) == 0);
     ENUM_LOOP_END*/
 
-    ForEach<EInventoryItemType>(
-        [&](EInventoryItemType EnumElem)
-        {
-            TestTrueExpr(InvComp->GetInventoryAmountByType(EnumElem) == 0);
-        });
+    ForEach<EInventoryItemType>([&](EInventoryItemType EnumElem) { TestTrueExpr(InvComp->GetInventoryAmountByType(EnumElem) == 0); });
 
     return true;
 }

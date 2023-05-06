@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "TPSTypes.h"
+
 #include "TPSCharacter.generated.h"
 
 class AController;

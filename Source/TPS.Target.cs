@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class TPSTarget : TargetRules
 {
-    public TPSTarget(TargetInfo Target) : base(Target)
+    public TPSTarget(TargetInfo Target)
+        : base(Target)
     {
         Type = TargetType.Game;
         DefaultBuildSettings = BuildSettingsVersion.V2;

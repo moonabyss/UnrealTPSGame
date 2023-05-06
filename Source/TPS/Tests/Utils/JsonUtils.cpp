@@ -4,14 +4,14 @@
 #include "Dom/JsonObject.h"
 #include "JsonObjectConverter.h"
 #include "Misc/FileHelper.h"
-#include "Serialization/JsonWriter.h"
 #include "Serialization/JsonReader.h"
+#include "Serialization/JsonWriter.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogJsonUtils, All, All);
 
 using namespace TPS::Test;
 
-bool JsonUtils::WriteInputData(const FString& FileName, const FInputData& InputData) 
+bool JsonUtils::WriteInputData(const FString& FileName, const FInputData& InputData)
 {
     TSharedPtr<FJsonObject> MainJsonObject = FJsonObjectConverter::UStructToJsonObject(InputData);
     if (!MainJsonObject.IsValid()) return false;
@@ -40,7 +40,7 @@ bool JsonUtils::WriteInputData(const FString& FileName, const FInputData& InputD
     return true;
 }
 
-bool JsonUtils::ReadInputData(const FString& FileName, FInputData& InputData) 
+bool JsonUtils::ReadInputData(const FString& FileName, FInputData& InputData)
 {
     TSharedPtr<FJsonObject> MainJsonObject = MakeShareable(new FJsonObject());
 

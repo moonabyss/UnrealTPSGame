@@ -4,8 +4,8 @@
 
 #include "TPS/Tests/BatteryTests.h"
 #include "CoreMinimal.h"
-#include "TPS/Items/Battery.h"
 #include "Misc/AutomationTest.h"
+#include "TPS/Items/Battery.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FBatteryTests, "TPSGame.Items.Battery",
     EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);

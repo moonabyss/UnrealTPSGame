@@ -5,8 +5,8 @@
 #include "TPS/Tests/ScienceFuncLibTests.h"
 #include "CoreMinimal.h"
 #include "Misc/AutomationTest.h"
-#include "TPS/Tests/TestUtils.h"
 #include "TPS/Science/ScienceFuncLib.h"
+#include "TPS/Tests/TestUtils.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFibonacciSimple, "TPSGame.Science.Fibonacci.Simple",
     EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);

@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class TPSServerTarget : TargetRules
 {
-    public TPSServerTarget(TargetInfo Target) : base(Target)
+    public TPSServerTarget(TargetInfo Target)
+        : base(Target)
     {
         Type = TargetType.Server;
         DefaultBuildSettings = BuildSettingsVersion.V2;

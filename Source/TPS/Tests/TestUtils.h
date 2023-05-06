@@ -2,6 +2,9 @@
 
 #if WITH_AUTOMATION_TESTS
 
+#include "Blueprint/UserWidget.h"
+#include "Blueprint/WidgetBlueprintLibrary.h"
+#include "Blueprint/WidgetTree.h"
 #include "CoreMinimal.h"
 #include "Engine/Blueprint.h"
 #include "Tests/AutomationCommon.h"
@@ -78,6 +81,21 @@ namespace TPS
             TFunction<void()> TimeoutCallback;
             float Timeout;
         };
+
+        template <class T>
+        T* FIndWidgetByClass()
+        {
+            TArray<UUserWidget*> Widgets;
+            UWidgetBlueprintLibrary::GetAllWidgetsOfClass(GetTestGameWorld(), Widgets, T::StaticClass(), false);
+
+            return Widgets.Num() != 0 ? Cast<T>(Widgets[0]) : nullptr;
+        }
+
+        UWidget* FindWidgetByName(const UUserWidget* Widget, const FName& WidgetName);
+
+        void DoInputAction(UInputComponent* InputComponent, const FString& ActionName, const FKey& Key);
+        void JumpPressed(UInputComponent* InputComponent);
+        void PausePressed(UInputComponent* InputComponent);
 
     }  // namespace Test
 }  // namespace TPS

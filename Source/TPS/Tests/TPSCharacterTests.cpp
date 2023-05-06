@@ -9,9 +9,9 @@
 #include "GameFramework/Character.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Misc/AutomationTest.h"
-#include "TPS/Tests/TestUtils.h"
 #include "TPS/TPSCharacter.h"
 #include "TPS/TPSTypes.h"
+#include "TPS/Tests/TestUtils.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogTPSCharacterTests, All, All);
 
@@ -28,7 +28,7 @@ using namespace TPS::Test;
 
 namespace
 {
-constexpr char* CharacterTestBPName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_ThirdPersonCharacter.BP_Test_ThirdPersonCharacter'";
+    constexpr char* CharacterTestBPName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_ThirdPersonCharacter.BP_Test_ThirdPersonCharacter'";
 }  // namespace
 
 bool FHealthMightBeChangeWithDamage::RunTest(const FString& Parameters)

@@ -22,6 +22,6 @@ public:
 protected:
     virtual void SetupInputComponent() override;
 
-    private:
+private:
     bool bInPause{false};
 };

@@ -12,10 +12,11 @@ void UPauseMenuWidget::NativeOnInitialized()
     CloseMenuButton->OnClicked.AddDynamic(this, &ThisClass::OnCloseMenu);
 }
 
-void UPauseMenuWidget::OnCloseMenu() {
+void UPauseMenuWidget::OnCloseMenu()
+{
     if (!GetWorld()) return;
 
-    if(auto* PC = Cast<ATPSPlayerController>(GetWorld()->GetFirstPlayerController()))
+    if (auto* PC = Cast<ATPSPlayerController>(GetWorld()->GetFirstPlayerController()))
     {
         PC->ToggleGamePause();
     }

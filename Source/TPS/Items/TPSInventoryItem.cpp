@@ -1,8 +1,8 @@
 // My game copyright
 
 #include "TPS/Items/TPSInventoryItem.h"
-#include "GameFramework/Pawn.h"
 #include "Components/SphereComponent.h"
+#include "GameFramework/Pawn.h"
 #include "TPS/Components/TPSInventoryComponent.h"
 
 ATPSInventoryItem::ATPSInventoryItem()
