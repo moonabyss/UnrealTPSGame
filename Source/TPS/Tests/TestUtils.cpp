@@ -58,7 +58,10 @@ namespace TPS
             if (!InputComp) return INDEX_NONE;
 
             const int32 AxisIndex = InputComp->AxisBindings.IndexOfByPredicate(
-                [&](const FInputAxisBinding& AxisBind) { return AxisBind.AxisName.ToString().Equals(AxisName); });
+                [&](const FInputAxisBinding& AxisBind)
+                {
+                    return AxisBind.AxisName.ToString().Equals(AxisName);
+                });
 
             return AxisIndex;
         }

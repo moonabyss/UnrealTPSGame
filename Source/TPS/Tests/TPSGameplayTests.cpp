@@ -116,12 +116,26 @@ bool FAllItemsAreTakenOnMovement::RunTest(const FString& Parameters)
 
     ADD_LATENT_AUTOMATION_COMMAND(FEngineWaitLatentCommand(1.0f));
     ADD_LATENT_AUTOMATION_COMMAND(FTPSDuringTimeLatentCommand(
-        [=]() { Character->InputComponent->AxisBindings[MoveForwardIndex].AxisDelegate.Execute(1.0f); }, []() {}, 3.0f));
+        [=]()
+        {
+            Character->InputComponent->AxisBindings[MoveForwardIndex].AxisDelegate.Execute(1.0f);
+        },
+        []()
+        {
+        },
+        3.0f));
     ADD_LATENT_AUTOMATION_COMMAND(FEngineWaitLatentCommand(1.0f));
     ADD_LATENT_AUTOMATION_COMMAND(FJumpLatentCommand(Character->InputComponent));
     ADD_LATENT_AUTOMATION_COMMAND(FEngineWaitLatentCommand(2.0f));
     ADD_LATENT_AUTOMATION_COMMAND(FTPSDuringTimeLatentCommand(
-        [=]() { Character->InputComponent->AxisBindings[MoveRightIndex].AxisDelegate.Execute(1.0f); }, []() {}, 2.0f));
+        [=]()
+        {
+            Character->InputComponent->AxisBindings[MoveRightIndex].AxisDelegate.Execute(1.0f);
+        },
+        []()
+        {
+        },
+        2.0f));
     ADD_LATENT_AUTOMATION_COMMAND(FEngineWaitLatentCommand(1.0f));
     ADD_LATENT_AUTOMATION_COMMAND(FFunctionLatentCommand(
         [=]()
