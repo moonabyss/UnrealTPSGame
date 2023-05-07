@@ -1,14 +1,14 @@
 @echo off
 
 rem Engine params pc-100
-rem set EnginePath_4.27=d:\UE_4.27
-rem set EnginePath_5.0=d:\UE_5.0
-rem set EnginePath_5.0_InstalledBuild=d:\Epic Games\Builds\UE_5.0_InstalledBuild
+set EnginePath_4.27=d:\UE_4.27
+set EnginePath_5.0=d:\UE_5.0
+set EnginePath_5.0_InstalledBuild=d:\Epic Games\Builds\UE_5.0_InstalledBuild
 
 rem Engine params abyss
-set EnginePath_4.27=c:\UE_4.27
-set EnginePath_5.0=c:\UE_5.0
-set EnginePath_5.0_InstalledBuild=f:\Builds\UE_5.0_InstalledBuild
+rem set EnginePath_4.27=c:\UE_4.27
+rem set EnginePath_5.0=c:\UE_5.0
+rem set EnginePath_5.0_InstalledBuild=f:\Builds\UE_5.0_InstalledBuild
 
 set UBTReletivePath4=Engine\Binaries\DotNET\UnrealBuildTool.exe
 set UBTReletivePath5=Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe

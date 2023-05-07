@@ -39,7 +39,7 @@ set TestHTemplateFilePath=%ProjectRoot%\devops\tests\templates\Test.h.template
 
 rem template file vars
 rem path with \
-set TempPath=%ProjectPureName%\%TestRelativePath%\%TestClassName%.h
+set TempPath=%TestRelativePath%\%TestClassName%.h
 rem replace \ with / for include string
 set TEST_INCLUDE_FILE="%TempPath:\=/%"
 set "OR=^|"

@@ -97,6 +97,42 @@ namespace TPS
         void JumpPressed(UInputComponent* InputComponent);
         void PausePressed(UInputComponent* InputComponent);
 
+        class FTakeScreenshotLatentCommand : public IAutomationLatentCommand
+        {
+        public:
+            FTakeScreenshotLatentCommand(const FString& InScreenshotName);
+            virtual ~FTakeScreenshotLatentCommand();
+
+        protected:
+            const FString ScreenshotName;
+            bool ScreenshotRequested{false};
+            bool CommandCompleted{false};
+
+            virtual void OnScreenshotTakenAndCompared();
+        };
+
+        class FTakeGameScreenshotLatentCommand : public FTakeScreenshotLatentCommand
+        {
+        public:
+            FTakeGameScreenshotLatentCommand(const FString& InScreenshotName);
+
+            virtual bool Update() override;
+        };
+
+        class FTakeUIScreenshotLatentCommand : public FTakeScreenshotLatentCommand
+        {
+        public:
+            FTakeUIScreenshotLatentCommand(const FString& InScreenshotName);
+
+            virtual bool Update() override;
+
+        private:
+            bool ScreenshotSetupDone{false};
+
+            virtual void OnScreenshotTakenAndCompared() override;
+            void SetBufferVisualization(const FName& VisualizeBuffer);
+        };
+
     }  // namespace Test
 }  // namespace TPS
 

@@ -19,9 +19,6 @@ using namespace TPS::Test;
 
 namespace
 {
-    
-
-    
 
     void NextSettingClick(int32 SettingIndex)
     {
