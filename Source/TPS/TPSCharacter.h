@@ -39,10 +39,10 @@ protected:
     virtual void BeginPlay() override;
 
     /** Called for forwards/backward input */
-    void MoveForward(float Value);
+    void MoveForward(const float Value);
 
     /** Called for side to side input */
-    void MoveRight(float Value);
+    void MoveRight(const float Value);
 
     /**
      * Called via input to turn at a given rate.
@@ -91,7 +91,7 @@ private:
     FTimerHandle HealTimerHandle;
 
     UFUNCTION()
-    void OnAnyDamageRecieved(
+    void OnAnyDamageReceived(
         AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
 
     void OnHealing();

@@ -13,11 +13,11 @@ using namespace TPS::Test;
 
 bool JsonUtils::WriteInputData(const FString& FileName, const FInputData& InputData)
 {
-    TSharedPtr<FJsonObject> MainJsonObject = FJsonObjectConverter::UStructToJsonObject(InputData);
+    const TSharedPtr<FJsonObject> MainJsonObject = FJsonObjectConverter::UStructToJsonObject(InputData);
     if (!MainJsonObject.IsValid()) return false;
 
     FString OutputString;
-    TSharedRef<TJsonWriter<>> JsonWriter = TJsonWriterFactory<>::Create(&OutputString);
+    const TSharedRef<TJsonWriter<>> JsonWriter = TJsonWriterFactory<>::Create(&OutputString);
 
     if (!FJsonSerializer::Serialize(MainJsonObject.ToSharedRef(), JsonWriter))
     {
@@ -51,7 +51,7 @@ bool JsonUtils::ReadInputData(const FString& FileName, FInputData& InputData)
         return false;
     }
 
-    TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(FileContentString);
+    const TSharedRef<TJsonReader<>> JsonReader = TJsonReaderFactory<>::Create(FileContentString);
     if (!FJsonSerializer::Deserialize(JsonReader, MainJsonObject))
     {
         UE_LOG(LogJsonUtils, Error, TEXT("JSON deserialization error"));

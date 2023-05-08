@@ -22,10 +22,10 @@ bool FFibonacciSimple::RunTest(const FString& Parameters)
     AddInfo("Fibonacci simple testing");
 
     const TArray<TPS::Test::TestPayload<int32, int32>> TestData{{0, 0}, {1, 1}, {2, 1}, {3, 2}, {4, 3}, {5, 5}};
-    for (const auto Data : TestData)
+    for (const auto [TestValue, ExpectedValue, Tolerance] : TestData)
     {
-        const FString InfoString = FString::Printf(TEXT("test value: %i, expected value: %i"), Data.TestValue, Data.ExpectedValue);
-        TestEqual(InfoString, UScienceFuncLib::Fibonacci(Data.TestValue), Data.ExpectedValue);
+        const FString InfoString = FString::Printf(TEXT("test value: %i, expected value: %i"), TestValue, ExpectedValue);
+        TestEqual(InfoString, UScienceFuncLib::Fibonacci(TestValue), ExpectedValue);
     }
 
     return true;

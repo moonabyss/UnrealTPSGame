@@ -32,8 +32,8 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FEveryInventoryItemMeshExists, "TPSGame.Items.I
 
 namespace
 {
-    constexpr char* InventoryItemBPName = "/Script/Engine.Blueprint'/Game/Inventory/BP_TPSInventoryItem.BP_TPSInventoryItem'";
-    constexpr char* InventoryItemBPTestName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_TPSInventoryItem.BP_Test_TPSInventoryItem'";
+    const char* InventoryItemBPName = "/Script/Engine.Blueprint'/Game/Inventory/BP_TPSInventoryItem.BP_TPSInventoryItem'";
+    const char* InventoryItemBPTestName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_TPSInventoryItem.BP_Test_TPSInventoryItem'";
 }  // namespace
 
 using namespace TPS::Test;
@@ -52,7 +52,7 @@ bool FCppActorCantBeCreated::RunTest(const FString& Parameters)
         return false;
     }
 
-    FTransform InitialTransform{FVector{1000.0f}};
+    const FTransform InitialTransform{FVector{1000.0f}};
     const ATPSInventoryItem* InvItem = World->SpawnActor<ATPSInventoryItem>(ATPSInventoryItem::StaticClass(), InitialTransform);
     if (!TestNull("Inventory item exists", InvItem))
     {
@@ -92,7 +92,7 @@ bool FBlueprintShouldBeSetupCorrectly::RunTest(const FString& Parameters)
     TestTrueExpr(CollisionComp->GetAttachmentRoot() == CollisionComp);*/
 
     ENUM_LOOP_START(ECollisionChannel, EnumElem)
-    if (EnumElem != ECollisionChannel::ECC_OverlapAll_Deprecated)
+    if (EnumElem != ECC_OverlapAll_Deprecated)
     {
         TestTrueExpr(CollisionComp->GetCollisionResponseToChannel(EnumElem) == ECollisionResponse::ECR_Overlap);
     }

@@ -63,7 +63,7 @@ void ATPSCharacter::BeginPlay()
     check(HealthData.MaxHealth > 0.0f);
     Health = HealthData.MaxHealth;
 
-    OnTakeAnyDamage.AddDynamic(this, &ATPSCharacter::OnAnyDamageRecieved);
+    OnTakeAnyDamage.AddDynamic(this, &ATPSCharacter::OnAnyDamageReceived);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -114,9 +114,9 @@ void ATPSCharacter::LookUpAtRate(float Rate)
     AddControllerPitchInput(Rate * TurnRateGamepad * GetWorld()->GetDeltaSeconds());
 }
 
-void ATPSCharacter::MoveForward(float Value)
+void ATPSCharacter::MoveForward(const float Value)
 {
-    if ((Controller != nullptr) && (Value != 0.0f))
+    if (Controller && !FMath::IsNearlyZero(Value))
     {
         // find out which way is forward
         const FRotator Rotation = Controller->GetControlRotation();
@@ -128,9 +128,9 @@ void ATPSCharacter::MoveForward(float Value)
     }
 }
 
-void ATPSCharacter::MoveRight(float Value)
+void ATPSCharacter::MoveRight(const float Value)
 {
-    if ((Controller != nullptr) && (Value != 0.0f))
+    if (Controller && !FMath::IsNearlyZero(Value))
     {
         // find out which way is right
         const FRotator Rotation = Controller->GetControlRotation();
@@ -153,7 +153,7 @@ bool ATPSCharacter::IsAlive() const
     return Health > 0.0f;
 }
 
-void ATPSCharacter::OnAnyDamageRecieved(
+void ATPSCharacter::OnAnyDamageReceived(
     AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
 {
     if (Damage <= 0.0f || !IsAlive()) return;
@@ -188,7 +188,7 @@ void ATPSCharacter::OnDeath()
     check(GetMesh());
 
     GetCharacterMovement()->DisableMovement();
-    GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+    GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Ignore);
     GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
     GetMesh()->SetSimulatePhysics(true);
     if (Controller)

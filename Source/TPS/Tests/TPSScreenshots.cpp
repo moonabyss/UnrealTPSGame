@@ -63,7 +63,7 @@ bool FHealthWidgetShouldBeRenderedCorrectAfterDamage::RunTest(const FString& Par
     if (!TestNotNull("Player controller exists", PC)) return false;
     if (!TestNotNull("Pawn exists", PC->GetPawn())) return false;
 
-    const float DamageAmount = 40.0f;
+    const float DamageAmount{40.0f};
     PC->GetPawn()->TakeDamage(DamageAmount, FDamageEvent{}, nullptr, nullptr);
 
     ADD_LATENT_AUTOMATION_COMMAND(FTakeUIScreenshotLatentCommand("health_widget_screenshot"));

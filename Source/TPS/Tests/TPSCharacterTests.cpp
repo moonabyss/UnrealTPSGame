@@ -28,7 +28,7 @@ using namespace TPS::Test;
 
 namespace
 {
-    constexpr char* CharacterTestBPName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_ThirdPersonCharacter.BP_Test_ThirdPersonCharacter'";
+    const char* CharacterTestBPName = "/Script/Engine.Blueprint'/Game/Tests/BP_Test_ThirdPersonCharacter.BP_Test_ThirdPersonCharacter'";
 }  // namespace
 
 bool FHealthMightBeChangeWithDamage::RunTest(const FString& Parameters)

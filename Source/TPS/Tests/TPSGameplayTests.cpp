@@ -152,7 +152,7 @@ bool FAllItemsAreTakenOnMovement::RunTest(const FString& Parameters)
 class FSimulateMovementLatentCommand : public IAutomationLatentCommand
 {
 public:
-    FSimulateMovementLatentCommand(UWorld* InWorld, UInputComponent* InInputComponent, const TArray<FBindingsData>& InBindingsData)
+    FSimulateMovementLatentCommand(const UWorld* InWorld, const UInputComponent* InInputComponent, const TArray<FBindingsData>& InBindingsData)
         : World(InWorld)
         , InputComponent(InInputComponent)
         , BindingsData(InBindingsData)

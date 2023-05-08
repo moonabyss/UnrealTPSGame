@@ -57,5 +57,4 @@ struct FInputData
 
     UPROPERTY()
     FTransform InitialTransform;
-    ;
 };
