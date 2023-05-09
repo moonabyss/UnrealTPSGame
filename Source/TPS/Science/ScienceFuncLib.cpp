@@ -19,7 +19,7 @@ int32 UScienceFuncLib::Factorial(const int32 Value)
     if (Value < 0) return -1;
 
     int32 Fac = 1;
-    for (int i = 1; i < Value; ++i)
+    for (int i = 1; i <= Value; ++i)
     {
         Fac *= i;
     }
