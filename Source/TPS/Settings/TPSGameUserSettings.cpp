@@ -27,7 +27,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("AntiAliasing_Loc", "Anti-Aliasing"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetAntiAliasingQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetAntiAliasingQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetAntiAliasingQuality));
         VideoSettings.Add(Setting);
     }
@@ -36,7 +40,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("Textures_Loc", "Textures"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetTextureQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetTextureQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetTextureQuality));
         VideoSettings.Add(Setting);
     }
@@ -45,7 +53,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("GlobalIllumination_Loc", "Global Illumination"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetGlobalIlluminationQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetGlobalIlluminationQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetGlobalIlluminationQuality));
         VideoSettings.Add(Setting);
     }
@@ -54,7 +66,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("Shadows_Loc", "Shadows"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetShadowQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetShadowQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetShadowQuality));
         VideoSettings.Add(Setting);
     }
@@ -63,7 +79,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("PostProcessing_Loc", "Post Processing"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetPostProcessingQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetPostProcessingQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetPostProcessingQuality));
         VideoSettings.Add(Setting);
     }
@@ -72,7 +92,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("Reflections_Loc", "Reflections"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetReflectionQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetReflectionQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetReflectionQuality));
         VideoSettings.Add(Setting);
     }
@@ -81,7 +105,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("Effects_Loc", "Effects"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetVisualEffectQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetVisualEffectQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetVisualEffectQuality));
         VideoSettings.Add(Setting);
     }
@@ -90,7 +118,11 @@ UTPSGameUserSettings::UTPSGameUserSettings()
         check(Setting);
         Setting->SetName(LOCTEXT("Shading_Loc", "Shading"));
         Setting->SetOptions(VideoSettingOptions);
-        Setting->AddGetter([&]() { return GetShadingQuality(); });
+        Setting->AddGetter(
+            [&]()
+            {
+                return GetShadingQuality();
+            });
         Setting->AddSetter(BIND_SETTINGS_FUNC(SetShadingQuality));
         VideoSettings.Add(Setting);
     }

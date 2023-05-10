@@ -6,21 +6,33 @@
 #include "GameFramework/Actor.h"
 #include "TPSTurret.generated.h"
 
-UCLASS()
+class ATPSProjectile;
+
+UCLASS(Abstract)
 class TPS_API ATPSTurret : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	ATPSTurret();
+    GENERATED_BODY()
+
+public:
+    ATPSTurret();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+    virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+    UStaticMeshComponent* TurretMesh;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    int32 AmmoCount{10};
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Units = s))
+    float FireFrequency{1.0f};
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    TSubclassOf<ATPSProjectile> ProjectileClass;
+
+private:
+    FTimerHandle FireTimerHandle;
+
+    void OnFire();
 };

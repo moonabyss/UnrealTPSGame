@@ -10,7 +10,7 @@ ATPSProjectile::ATPSProjectile()
 
     CollisionComponent = CreateDefaultSubobject<USphereComponent>("SphereComponent");
     check(CollisionComponent);
-    CollisionComponent->InitSphereRadius(10.0f);
+    CollisionComponent->InitSphereRadius(3.0f);
     CollisionComponent->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
     CollisionComponent->SetCollisionResponseToAllChannels(ECR_Block);
     SetRootComponent(CollisionComponent);
@@ -26,12 +26,12 @@ void ATPSProjectile::BeginPlay()
     Super::BeginPlay();
 
     MovementComponent->Velocity = ShotDirection * MovementComponent->InitialSpeed;
-    CollisionComponent->OnComponentHit.AddDynamic(this, &ThisClass::OnProjectileHit);
+    CollisionComponent->OnComponentHit.AddDynamic(this, &ATPSProjectile::OnProjectileHit);
     SetLifeSpan(LifeSeconds);
 }
 
-void ATPSProjectile::OnProjectileHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-    FVector NormalImpulse, const FHitResult& Hit)
+void ATPSProjectile::OnProjectileHit(
+    UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
     if (GetWorld() && OtherActor)
     {

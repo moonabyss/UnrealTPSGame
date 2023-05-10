@@ -22,7 +22,11 @@ FText UTPSGameSetting::GetName() const
 FSettingOption UTPSGameSetting::GetCurrentOption() const
 {
     const int32 CurrentValue = GetCurrentValue();
-    const auto Option = Options.FindByPredicate([&](const auto& Opt) { return CurrentValue == Opt.Value; });
+    const auto Option = Options.FindByPredicate(
+        [&](const auto& Opt)
+        {
+            return CurrentValue == Opt.Value;
+        });
     if (!Option)
     {
         UE_LOG(LogTPSGameSetting, Error, TEXT("Option doesn't exist"));
@@ -83,5 +87,9 @@ void UTPSGameSetting::SetCurrentValue(int32 Value)
 int32 UTPSGameSetting::GetCurrentIndex() const
 {
     const int32 CurrentValue = GetCurrentValue();
-    return Options.IndexOfByPredicate([&](const auto& Opt) { return CurrentValue == Opt.Value; });
+    return Options.IndexOfByPredicate(
+        [&](const auto& Opt)
+        {
+            return CurrentValue == Opt.Value;
+        });
 }

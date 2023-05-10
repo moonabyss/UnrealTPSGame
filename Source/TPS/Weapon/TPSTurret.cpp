@@ -1,27 +1,43 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Weapon/TPSTurret.h"
 
-// Sets default values
+#include "TPSProjectile.h"
+
 ATPSTurret::ATPSTurret()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+    PrimaryActorTick.bCanEverTick = false;
 
+    TurretMesh = CreateDefaultSubobject<UStaticMeshComponent>("TurretMesh");
+    check(TurretMesh);
+    SetRootComponent(TurretMesh);
 }
 
-// Called when the game starts or when spawned
 void ATPSTurret::BeginPlay()
 {
-	Super::BeginPlay();
-	
+    Super::BeginPlay();
+
+    check(AmmoCount > 0);
+    check(FireFrequency > 0.0f);
+
+    const float FirstDelay = FireFrequency;
+    GetWorldTimerManager().SetTimer(FireTimerHandle, this, &ThisClass::OnFire, FireFrequency, true, FirstDelay);
 }
 
-// Called every frame
-void ATPSTurret::Tick(float DeltaTime)
+void ATPSTurret::OnFire()
 {
-	Super::Tick(DeltaTime);
+    if (--AmmoCount == 0)
+    {
+        GetWorldTimerManager().ClearTimer(FireTimerHandle);
+    }
 
+    if (GetWorld())
+    {
+        const FTransform SocketTransform = TurretMesh->GetSocketTransform("Muzzle");
+        if (auto* ProjectileObj = GetWorld()->SpawnActorDeferred<ATPSProjectile>(ProjectileClass, SocketTransform))
+        {
+            ProjectileObj->SetShotDirection(SocketTransform.GetRotation().GetForwardVector());
+            ProjectileObj->FinishSpawning(SocketTransform);
+        }
+    }
 }
-
