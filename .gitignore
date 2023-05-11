@@ -82,3 +82,5 @@ Content/StarterContent/*
 # VSCode Files
 /.vscode/*
 *.code-workspace
+
+devops/tests/data

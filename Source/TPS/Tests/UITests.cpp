@@ -56,7 +56,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FAutoBenchmarkShouldWork, "TPSGame.UI.AutoBench
 bool FPauseMenuShouldBeVisibleOnGamePaused::RunTest(const FString& Parameters)
 {
     const auto Level = LevelScope("/Game/ThirdPerson/Maps/ThirdPersonMap");
-    APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
+    const APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
     TestTrueExpr(PC != nullptr);
 
     const UPauseMenuWidget* PauseMenuWidget = FIndWidgetByClass<UPauseMenuWidget>();
@@ -71,7 +71,7 @@ bool FPauseMenuShouldBeVisibleOnGamePaused::RunTest(const FString& Parameters)
 bool FPauseMenuShouldBeCollapsedOnGameUnPaused::RunTest(const FString& Parameters)
 {
     const auto Level = LevelScope("/Game/ThirdPerson/Maps/ThirdPersonMap");
-    APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
+    const APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
     TestTrueExpr(PC != nullptr);
 
     const UPauseMenuWidget* PauseMenuWidget = FIndWidgetByClass<UPauseMenuWidget>();
@@ -107,7 +107,7 @@ bool FAllVideoSettingsExist::RunTest(const FString& Parameters)
 bool FSettingsCanBeApplied::RunTest(const FString& Parameters)
 {
     const auto Level = LevelScope("/Game/ThirdPerson/Maps/ThirdPersonMap");
-    APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
+    const APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
     TestTrueExpr(PC != nullptr);
     PausePressed(PC->InputComponent);
 
@@ -123,6 +123,7 @@ bool FSettingsCanBeApplied::RunTest(const FString& Parameters)
     TestTrueExpr(GIQualityAfter == VideoSettings[2]->GetCurrentOption().Value);
 
     UTPSGameUserSettings::Get()->SetGlobalIlluminationQuality(GIQualityBefore);
+    UTPSGameUserSettings::Get()->ApplySettings(false);
 
     return true;
 }
@@ -130,7 +131,7 @@ bool FSettingsCanBeApplied::RunTest(const FString& Parameters)
 bool FAutoBenchmarkShouldWork::RunTest(const FString& Parameters)
 {
     const auto Level = LevelScope("/Game/ThirdPerson/Maps/ThirdPersonMap");
-    APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
+    const APlayerController* PC = GetTestGameWorld()->GetFirstPlayerController();
     TestTrueExpr(PC != nullptr);
     PausePressed(PC->InputComponent);
 
