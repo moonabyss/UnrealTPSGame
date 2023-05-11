@@ -58,10 +58,7 @@ namespace TPS
             if (!InputComp) return INDEX_NONE;
 
             const int32 AxisIndex = InputComp->AxisBindings.IndexOfByPredicate(
-                [&](const FInputAxisBinding& AxisBind)
-                {
-                    return AxisBind.AxisName.ToString().Equals(AxisName);
-                });
+                [&](const FInputAxisBinding& AxisBind) { return AxisBind.AxisName.ToString().Equals(AxisName); });
 
             return AxisIndex;
         }
@@ -210,6 +207,13 @@ namespace TPS
             }
         }
 
+        void SpecCloseLevel(const UWorld* World)
+        {
+            if (APlayerController* PC = World->GetFirstPlayerController())
+            {
+                PC->ConsoleCommand(TEXT("Exit"), true);
+            }
+        }
     }  // namespace Test
 }  // namespace TPS
 

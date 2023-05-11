@@ -22,10 +22,10 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
     UStaticMeshComponent* TurretMesh;
 
-    UPROPERTY(EditAnywhere, BlueprintReadOnly)
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
     int32 AmmoCount{10};
 
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (Units = s))
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (Units = s))
     float FireFrequency{1.0f};
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly)

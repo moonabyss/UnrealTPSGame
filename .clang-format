@@ -16,7 +16,7 @@ AllowShortBlocksOnASingleLine: Empty
 AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortCaseLabelsOnASingleLine: true
-AllowShortLambdasOnASingleLine: None
+AllowShortLambdasOnASingleLine: Inline
 IndentCaseLabels: true
 AlignAfterOpenBracket: DontAlign
 AllowAllArgumentsOnNextLine: true
