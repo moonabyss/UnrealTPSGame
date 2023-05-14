@@ -84,3 +84,4 @@ Content/StarterContent/*
 *.code-workspace
 
 devops/tests/data
+devops/jenkins
