@@ -74,7 +74,7 @@ def main():
                 xmlTree.SubElement(xml_test_case, "failure", message=tests[test_suite][test_case])
 
     # write output XML
-    xml_output = miniDom.parseString(xmlTree.tostring(xml_root, encoding="utf8", method="xml"))
+    xml_output = miniDom.parseString(xmlTree.tostring(xml_root, encoding="utf-8", method="xml"))
     # print(xml_output.toprettyxml(indent="  "))
 
     xml_file = open(args.junit_xml_path, "w")
