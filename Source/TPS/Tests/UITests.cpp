@@ -19,7 +19,6 @@ using namespace TPS::Test;
 
 namespace
 {
-
     void NextSettingClick(int32 SettingIndex)
     {
         const auto* VideoSettingsWidget = FIndWidgetByClass<UVideoSettingsWidget>();
@@ -35,23 +34,22 @@ namespace
         const auto* BenchmarkButton = Cast<UButton>(FindWidgetByName(VideoSettingsWidget, "RunBenchmarkButton"));
         BenchmarkButton->OnClicked.Broadcast();
     }
-
 }  // namespace
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FPauseMenuShouldBeVisibleOnGamePaused, "TPSGame.UI.PauseMenuShouldBeVisibleOnGamePaused",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FPauseMenuShouldBeCollapsedOnGameUnPaused, "TPSGame.UI.PauseMenuShouldBeCollapsedOnGameUnPaused",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FAllVideoSettingsExist, "TPSGame.UI.AllVideoSettingsExist",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSettingsCanBeApplied, "TPSGame.UI.SettingsCanBeApplied",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FAutoBenchmarkShouldWork, "TPSGame.UI.AutoBenchmarkShouldWork",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::StressFilter | EAutomationTestFlags::MediumPriority);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::StressFilter | EAutomationTestFlags::CriticalPriority);
 
 bool FPauseMenuShouldBeVisibleOnGamePaused::RunTest(const FString& Parameters)
 {
