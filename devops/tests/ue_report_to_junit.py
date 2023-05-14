@@ -21,7 +21,10 @@ def main():
 
     # load JSON
     json_file = open(args.ue_report_path, encoding="utf-8-sig")
-    json_obj = json.loads(json_file.read())
+    json_str = json_file.read()
+    # заменяем символ '\u00a0' на обычный пробел в строке json_str
+    json_str = json_str.replace('\u00a0', ' ')
+    json_obj = json.loads(json_str)
     # print(json_obj)
 
     # create xml root
@@ -72,8 +75,7 @@ def main():
             xml_test_case = xmlTree.SubElement(xml_test_suite, "testcase", name=test_case, classname=test_suite)
             if tests[test_suite][test_case]:
                 xmlTree.SubElement(xml_test_case, "failure", message=tests[test_suite][test_case])
-    #replace x0a
-    replace_unicode(xml_root)
+
     # write output XML
     xml_output = miniDom.parseString(xmlTree.tostring(xml_root, encoding="utf-8", method="xml"))
     # print(xml_output.toprettyxml(indent="  "))
@@ -92,12 +94,6 @@ def create_error_msg(test):
             err_counter += 1
 
     return error_msg
-
-def replace_unicode(xml_element):
-    for child in xml_element:
-        if child.text and u'\xa0' in child.text:
-            child.text = child.text.replace(u'\xa0', ' ')
-        replace_unicode(child)
 
 if __name__ == "__main__":
     main()
