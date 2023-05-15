@@ -82,6 +82,7 @@ Content/StarterContent/*
 # VSCode Files
 /.vscode/*
 *.code-workspace
+.idea/
 
 devops/tests/data/
 devops/jenkins/
