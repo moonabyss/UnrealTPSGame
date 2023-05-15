@@ -1,0 +1,9 @@
+[submodule "devops/docs/Doxygen-Flat-Theme"]
+	path = devops/docs/Doxygen-Flat-Theme
+	url = https://github.com/moonabyss/Doxygen-Flat-Theme.git
+[submodule "devops/docs/Doxygen-Dark-Theme"]
+	path = devops/docs/Doxygen-Dark-Theme
+	url = https://github.com/moonabyss/Doxygen-Dark-Theme.git
+[submodule "devops/docs/UE-Doxygen-Filter"]
+	path = devops/docs/UE-Doxygen-Filter
+	url = https://github.com/moonabyss/UE-Doxygen-Filter.git

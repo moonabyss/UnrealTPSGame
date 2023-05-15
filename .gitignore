@@ -83,5 +83,6 @@ Content/StarterContent/*
 /.vscode/*
 *.code-workspace
 
-devops/tests/data
-devops/jenkins
+devops/tests/data/
+devops/jenkins/
+Documentation/
