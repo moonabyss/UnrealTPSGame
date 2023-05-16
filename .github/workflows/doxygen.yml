@@ -27,7 +27,7 @@ jobs:
         run: pip install conan
         
       - name: Install Doxygen
-        run: conan download doxygen/1.9.2:68ef3b853de6b165f8f476aeb9fd9b19931b5f0f
+        run: conan download doxygen/1.9.2:68ef3b853de6b165f8f476aeb9fd9b19931b5f0f --remote conancenter
         
       - name: Run Doxygen
         run: echo "Run Doxygen"
