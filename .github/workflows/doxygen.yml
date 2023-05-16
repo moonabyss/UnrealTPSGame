@@ -30,10 +30,12 @@ jobs:
         run: conan download doxygen/1.9.4:68ef3b853de6b165f8f476aeb9fd9b19931b5f0f --remote conancenter
         
       - name: Run Doxygen
-        run: echo "Run Doxygen"
+        run: doxygen devops\docs\Doxyfile
         
       - name: Upload Docs
-        run: echo "Upload Docs"
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: Documentation\html
         
       - name: Setup Pages
         run: echo "Setup Pages"
