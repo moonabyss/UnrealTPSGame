@@ -27,7 +27,7 @@ jobs:
         run: pip install conan
         
       - name: Install Doxygen
-        run: conan install doxygen/1.9.4@#82f4dcf07d68ddee32ca42fc3184155c --generator markdown --profile my
+        run: conan install doxygen
         
       - name: Run Doxygen
         run: echo "Run Doxygen"
