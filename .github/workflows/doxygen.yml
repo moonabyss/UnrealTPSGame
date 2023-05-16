@@ -17,9 +17,14 @@ jobs:
         
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          
+      - name: Install Conan
+        run: pip install conan
         
       - name: Install Doxygen
-        run: echo "Install Doxygen"
+        run: conan install doxygen/1.9.4@#82f4dcf07d68ddee32ca42fc3184155c --remote conancenter
         
       - name: Run Doxygen
         run: echo "Run Doxygen"
