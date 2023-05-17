@@ -1,6 +1,8 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using System.Linq;
+using EpicGames.Core;
 
 public class TPS : ModuleRules
 {
@@ -13,5 +15,10 @@ public class TPS : ModuleRules
             "JsonUtilities", "UMG", "FunctionalTesting" });
 
         PublicIncludePaths.Add("TPS");
+
+        if (Target.ProjectDefinitions.Contains("UNOPTIMIZED_CODE"))
+        {
+            OptimizeCode = CodeOptimization.Never;
+        }
     }
 }
