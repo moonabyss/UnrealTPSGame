@@ -17,8 +17,8 @@ call "%RunUATPath%" BuildCookRun ^
 -build -cook -ubtargs="-UnoptimizedCode"
 
 rem run tests
-set TestRunner="%EditorPath%" "%ProjectPath%" -ExecCmds="Automation RunTests %TestNames%;Quit" ^
--log -abslog="%TestOutputLogPath%" -nosplash -ReportOutputPath="%ReportOutputPath%"
+set TestRunner="%EditorPath%" "%ProjectPath%" -ExecCmds="Automation SetPriority Critical;RunTests %TestNames%;Quit" ^
+-log -abslog="%TestOutputLogPath%" -nosplash -nullRHI -ReportOutputPath="%ReportOutputPath%"
 
 rem run code coverage
 set ExportType=html:"%ReportOutputPath%\Coverage\CodeCoverageReport"

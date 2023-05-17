@@ -167,6 +167,7 @@ bool FAutoHealShouldRestoreHealth::RunTest(const FString& Parameters)
     const float HealthDiff = HealthData.MaxHealth * (1.0f - Character->GetHealthPercent());
     const float HealingDuration = HealthData.HealRate * (FMath::CeilToInt(HealthDiff / HealthData.HealModifier) + 1);
     // ADD_LATENT_AUTOMATION_COMMAND(FAutoHealCheckLatentCommand(Character, HealingDuration));
+    ADD_LATENT_AUTOMATION_COMMAND(FEngineWaitLatentCommand(1.0f));
     ADD_LATENT_AUTOMATION_COMMAND(FDelayedFunctionLatentCommand(
         [Character]()                                                             //
         {                                                                         //
