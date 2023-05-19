@@ -13,15 +13,10 @@ pipeline {
         }
     }
 
-    parameters {
-        choice name: 'CONFIG', choices: ['Development', 'Shipping', 'DebugGame'], description: 'Build configurations'
-        choice name: 'PLATFORM', choices: ['Win64'], description: 'Build platform'
-        string name: 'GIT_BRANCH_GAME', defaultValue: 'master'
-    }
-
     /*environment {
         GIT_URL_GAME = 'https://github.com/moonabyss/UnrealTPSGame'
         GIT_CREDENTIALS_GAME = 'moonabyss-github'
+        GIT_BRANCH_GAME = 'master'
         UAT_PATH = 'f:\\Builds\\UE_5.0_InstalledBuild\\Engine\\Build\\BatchFiles\\RunUAT.bat'
         PROJECT_PATH = "$BUILD_DIR\\TPS.uproject"
         PLATFORM = 'Win64'
@@ -30,6 +25,8 @@ pipeline {
         BUILD_FLAGS = '-build -cook -package -stage -archive -pak -allmaps'
         ZIP_DIR = "Build\\**\\*.*"
         SLACK_CHANNEL = 'tps-game-builds'
+        CONFIG = 'Development' //['Development', 'Shipping', 'DebugGame']
+        PLATFORM = 'Win64'
     }*/
 
     stages {
