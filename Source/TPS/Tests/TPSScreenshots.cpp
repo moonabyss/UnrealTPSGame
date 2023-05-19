@@ -9,17 +9,21 @@
 #include "Tests/TestUtils.h"
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FRenderingShouldBeCorrect, "TPSGame.Screenshots.RenderingShouldBeCorrect",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority | EAutomationTestFlags::NonNullRHI);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority |
+        EAutomationTestFlags::NonNullRHI);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FMainPlayerHUDShouldBeRendered, "TPSGame.Screenshots.MainPlayerHUDShouldBeRendered",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority | EAutomationTestFlags::NonNullRHI);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority |
+        EAutomationTestFlags::NonNullRHI);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FHealthWidgetShouldBeRenderedCorrectAfterDamage,
     "TPSGame.Screenshots.HealthWidgetShouldBeRenderedCorrectAfterDamage",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority | EAutomationTestFlags::NonNullRHI);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority |
+        EAutomationTestFlags::NonNullRHI);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FSettingsWidgetBeRenderedWhenGamePaused, "TPSGame.Screenshots.SettingsWidgetBeRenderedWhenGamePaused",
-    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority | EAutomationTestFlags::NonNullRHI);
+    EAutomationTestFlags::ApplicationContextMask | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority |
+        EAutomationTestFlags::NonNullRHI);
 
 using namespace TPS::Test;
 
