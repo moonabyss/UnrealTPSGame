@@ -5,7 +5,7 @@ rem set EnginePath_4.27=d:\UE_4.27
 rem set EnginePath_5.0=d:\UE_5.0
 rem set EnginePath_5.0_InstalledBuild=d:\Epic Games\Builds\UE_5.0_InstalledBuild
 
-rem Engine params abyss
+rem Engine params eagle
 set EnginePath_4.27=c:\UE_4.27
 set EnginePath_5.0=c:\UE_5.0
 set EnginePath_5.0_InstalledBuild=f:\Builds\UE_5.0_InstalledBuild
