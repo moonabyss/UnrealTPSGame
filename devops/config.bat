@@ -36,7 +36,7 @@ set ArchivePath=%ProjectRoot%\Build
 
 rem Other params
 set SourceCodePath=%ProjectRoot%\Source
-set DirsToRemove=Intermediate DerivedDataCache Saved Binaries .vs Build
+set DirsToRemove=Intermediate DerivedDataCache Saved Binaries .vs Build Documentation
 set FilesToRemove=*.sln
 
 rem Target params
