@@ -1,0 +1,91 @@
+def ColorFromBuildResult (result) {
+    if ("${result}" == 'SUCCESS') return '#18a558';
+    if ("${result}" == 'ABORTED') return '#6e6e6e';
+    if ("${result}" == 'UNSTABLE') return '#fcba03';
+    return '#ff0000';
+}
+
+pipeline {
+    agent {
+        node {
+            label ""
+            customWorkspace "$BUILD_DIR"
+        }
+    }
+
+    /*environment {
+        SLACK_CHANNEL = 'unreal-engine-sources'
+        UE_BUILD_PLATFORM = 'Win64'
+        UE_BUILD_CONFIGURATION = 'Shipping;Development;DebugGame'
+        SOURCE_DIR = 'e:\\Sources\\UE_5.1'
+    }*/
+
+    stages {
+        stage('Information') {
+            steps {
+                slackSend channel: "$SLACK_CHANNEL",
+                    color: "$currentBuild.previousBuild" == 'null' ? '#18a558' : ColorFromBuildResult("$currentBuild.previousBuild.result"),
+                    message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+        }
+
+        stage('Change build directory') {
+            environment {
+                BEFORE = '<Property Name=\\"LocalInstalledDir\\" Value=\\"\\$\\(BuiltDirectory\\)/Windows\\"/>'
+                AFTER = '<Property Name=\\"LocalInstalledDir\\" Value=\\"$(BuiltDirectory)\\"/>'
+            }
+            steps {
+                bat '''
+                    powershell -Command "(gc %SOURCE_DIR%\\Engine\\Build\\InstalledEngineBuild.xml) -replace '%BEFORE%', '%AFTER%' | Out-File %SOURCE_DIR%\\Engine\\Build\\InstalledEngineBuild.xml"
+                '''
+            }
+        }
+
+        stage('Fix for .NET 4.5') {
+            steps {
+                bat '''
+                    set "folder=%SOURCE_DIR%\\Engine\\Source"
+                    set "oldText=<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>"
+                    set "newText=<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>"
+
+                    for /r "%folder%" %%G in (*.csproj) do (
+                        powershell -Command "(gc '%%G') -replace '%oldText%', '%newText%' | Out-File -Encoding UTF8 '%%G'"
+                    )
+                '''
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat '''
+                    "%SOURCE_DIR%\\Engine\\Build\\BatchFiles\\RunUAT.bat" BuildGraph ^
+                    -target="Make Installed Build %UE_BUILD_PLATFORM%" ^
+                    -script="%SOURCE_DIR%\\Engine\\Build\\InstalledEngineBuild.xml" ^
+                    -clean ^
+                    -set:HostPlatformOnly=true ^
+                    -set:WithClient=true ^
+                    -set:WithServer=true ^
+                    -set:WithDDC=false ^
+                    -set:GameConfigurations=%UE_BUILD_CONFIGURATION% ^
+                    -set:BuiltDirectory="%BUILD_DIR%"
+                '''
+            }
+        }
+
+        stage('Clean up') {
+            steps {
+                bat '''
+                    git -C %SOURCE_DIR% reset --hard HEAD
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            slackSend channel: "$SLACK_CHANNEL",
+                color: ColorFromBuildResult("$currentBuild.currentResult"),
+                message: "Build $currentBuild.currentResult: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        }
+    }
+}

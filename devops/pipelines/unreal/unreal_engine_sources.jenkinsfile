@@ -1,0 +1,68 @@
+def ColorFromBuildResult (result) {
+    if ("${result}" == 'SUCCESS') return '#18a558';
+    if ("${result}" == 'ABORTED') return '#6e6e6e';
+    if ("${result}" == 'UNSTABLE') return '#fcba03';
+    return '#ff0000';
+}
+
+pipeline {
+    agent {
+        node {
+            label ""
+            customWorkspace "$BUILD_DIR"
+        }
+    }
+
+    /*environment {
+        GIT_URL_GAME = 'git@github.com:EpicGames/UnrealEngine.git'
+        GIT_CREDENTIALS_GAME = 'moonabyss-ssh'
+        GIT_BRANCH_GAME = 'release'
+        GIT_CLONE_TIMEOUT_MIN = 300
+        SLACK_CHANNEL = 'unreal-engine-sources'
+        SETUP_FLAGS = '--force'
+        PROJECT_FILE_FLAGS = '-2022'
+    }*/
+
+    stages {
+
+        stage('Git clone') {
+            steps {
+                slackSend channel: "$SLACK_CHANNEL",
+                    color: "$currentBuild.previousBuild" == 'null' ? '#18a558' : ColorFromBuildResult("$currentBuild.previousBuild.result"),
+                    message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+
+                checkout scmGit(branches: [[name: "$GIT_BRANCH_GAME"]], 
+                    extensions: [
+                        cleanBeforeCheckout(), 
+                        cloneOption(depth: 1, noTags: true, shallow: true, timeout: "$GIT_CLONE_TIMEOUT_MIN")
+                    ], 
+                    userRemoteConfigs: [[credentialsId: "$GIT_CREDENTIALS_GAME", url: "$GIT_URL_GAME"]]
+                )
+            }
+        }
+
+        stage('Setup') {
+            steps {
+                bat '''
+                    "%BUILD_DIR%\\Setup.bat" %SETUP_FLAGS%
+                '''
+            }
+        }
+
+        stage('Generate project files') {
+            steps {
+                bat '''
+                    "%BUILD_DIR%\\GenerateProjectFiles.bat" %PROJECT_FILE_FLAGS%
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            slackSend channel: "$SLACK_CHANNEL",
+                color: ColorFromBuildResult("$currentBuild.currentResult"),
+                message: "Build $currentBuild.currentResult: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        }
+    }
+}
