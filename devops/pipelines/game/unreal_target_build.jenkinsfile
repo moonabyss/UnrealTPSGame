@@ -22,7 +22,7 @@ pipeline {
         PLATFORM = 'Win64'
         // ARCHIVE_PATH = "e:\\JenkinsJobs\\Artifacts\\$JOB_NAME\\$BUILD_NUMBER"
         ARCHIVE_PATH = "$BUILD_DIR\\Build"
-        BUILD_FLAGS = '-build -cook -package -stage -archive -pak -allmaps' // -server -client -noclient
+        BUILD_FLAGS = '-build -cook -package -stage -archive -pak -allmaps' // -client -server -noclient
         ZIP_DIR = "Build\\**\\*.*"
         SLACK_CHANNEL = 'tps-game-builds'
         CONFIG = 'Development' //['Development', 'Shipping', 'DebugGame']
@@ -48,8 +48,8 @@ pipeline {
                     "%UAT_PATH%" BuildCookRun ^
                     -project="%PROJECT_PATH%" ^
                     -platform="%PLATFORM%" ^
-                    -clientconfig="%CONFIGURATION%" ^
-                    -serverconfig="%CONFIGURATION%" ^
+                    -clientconfig="%CONFIG%" ^
+                    -serverconfig="%CONFIG%" ^
                     -archivedirectory="%ARCHIVE_PATH%" ^
                     %BUILD_FLAGS%
                 '''
