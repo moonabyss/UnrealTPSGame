@@ -12,7 +12,12 @@ public class TPS : ModuleRules
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
         PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "HeadMountedDisplay", "Json",
-            "JsonUtilities", "UMG", "FunctionalTesting" });
+            "JsonUtilities", "UMG" });
+
+        if (Target.Configuration != UnrealTargetConfiguration.Shipping)
+        {
+            PublicDependencyModuleNames.Add("FunctionalTesting");
+        }
 
         PublicIncludePaths.Add("TPS");
 
