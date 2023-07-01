@@ -29,7 +29,7 @@ pipeline {
             steps {
                 slackSend channel: "$SLACK_CHANNEL",
                     color: "$currentBuild.previousBuild" == 'null' ? '#18a558' : ColorFromBuildResult("$currentBuild.previousBuild.result"),
-                    message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+                    message: "Build STARTED: ${env.JOB_NAME} | branch: ${GIT_BRANCH_GAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
 
                 checkout scmGit(branches: [[name: "$GIT_BRANCH_GAME"]], 
                     extensions: [

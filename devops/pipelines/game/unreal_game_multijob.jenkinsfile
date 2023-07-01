@@ -1,0 +1,70 @@
+def ColorFromBuildResult (result) {
+    if ("${result}" == 'SUCCESS') return '#18a558';
+    if ("${result}" == 'ABORTED') return '#6e6e6e';
+    if ("${result}" == 'UNSTABLE') return '#fcba03';
+    return '#ff0000';
+}
+
+pipeline {
+    agent none
+
+    /*environment {
+        SLACK_CHANNEL = 'tps-game-builds'
+    }*/
+
+    stages {
+        stage('Game test') {
+            steps {
+                slackSend channel: "$SLACK_CHANNEL",
+                    color: "$currentBuild.previousBuild" == 'null' ? '#18a558' : ColorFromBuildResult("$currentBuild.previousBuild.result"),
+                    message: "Build STARTED: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+
+                build job: 'TPS-game-test-runner-pipeline', parameters: [string(name: 'BUILD_DIR', value: 'e:\\JenkinsJobs\\TPS-game-test-runner-pipeline')]
+            }
+        }
+
+        stage('Matrix') {
+            matrix {
+                agent {
+                    node {
+                        label "master"
+                    }
+                }
+                axes {
+                    axis {
+                        name 'CONFIG'
+                        values 'Development', 'Shipping'
+                    }
+                }
+
+                stages {
+                    stage('Game build') {
+                        steps {
+                            build job: 'TPS-game-target-build-pipeline', parameters: [string(name: 'BUILD_DIR', value: "e:\\JenkinsJobs\\TPS-game-pipeline-$CONFIG"), string(name: 'CONFIG', value: "$CONFIG")]
+                        }
+                    }
+
+                    stage('Client and server build') {
+                        steps {
+                            build job: 'TPS-client-and-server-target-build-pipeline', parameters: [string(name: 'BUILD_DIR', value: "e:\\JenkinsJobs\\TPS-client-and-server-pipeline-$CONFIG"), string(name: 'CONFIG', value: "$CONFIG")]
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Doxygen docs gen') {
+            steps {
+                build job: 'TPS-game-doxygen-docs-pipeline', parameters: [string(name: 'BUILD_DIR', value: 'e:\\JenkinsJobs\\TPS-game-doxygen-docs-pipeline')]
+            }
+        }
+    }
+
+    post {
+        always {
+            slackSend channel: "$SLACK_CHANNEL",
+                color: ColorFromBuildResult("$currentBuild.currentResult"),
+                message: "Build $currentBuild.currentResult: ${env.JOB_NAME} #${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        }
+    }
+}
